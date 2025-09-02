@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía para crear y aplicar formato a la matriz de un balance</title>
+    <style>
+        /* --- I. Estructura General y Maquetación --- */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;800&display=swap');
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            line-height: 1.6;
+            color: #333;
+            background-color: #ffffff;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px 40px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border-radius: 8px;
+        }
+
+        /* --- II. Tipografía y Estilo de Texto --- */
+        h1, h2, h3 {
+            font-weight: 800;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #AEC000;
+            margin-bottom: 0.5em;
+        }
+        
+        h2 {
+            font-size: 1.8em;
+            color: #AEC000;
+            border-bottom: 3px solid #AEC000;
+            padding-bottom: 0.25em;
+            margin-bottom: 0.75em;
+            margin-top: 1.5em;
+        }
+
+        strong {
+            font-weight: 800;
+        }
+
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #eee;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        
+        ol {
+            padding-left: 25px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+        }
+        
+        /* --- IV. Componentes Interactivos y Reutilizables --- */
+
+        /* 1. Cajas de Información */
+        .intro, .conclusion {
+            margin: 25px 0;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #d9d9d9;
+            border-left: 5px solid #595959;
+        }
+
+        .explanation-box {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 4px;
+        }
+        
+        .why {
+            background-color: #FAFFD5;
+            border-left: 4px solid #DBF900;
+        }
+        
+        .how {
+            background-color: #ffE0B7;
+            border-left: 4px solid #ef8600;
+        }
+
+        /* 2. Secciones Desplegables */
+        details {
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        summary {
+            font-weight: 800;
+            padding: 15px;
+            background-color: #d9d9d9;
+            cursor: pointer;
+            outline: none;
+            list-style: none;
+            position: relative;
+        }
+        
+        summary::-webkit-details-marker {
+            display: none;
+        }
+        
+        summary::before {
+            content: '▶';
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%) rotate(0deg);
+            transition: transform 0.2s ease-in-out;
+            font-size: 0.8em;
+        }
+        
+        details[open] > summary {
+            background-color: #AEC000;
+        }
+
+        details[open] summary::before {
+            transform: translateY(-50%) rotate(90deg);
+        }
+        
+        .details-content {
+            padding: 20px;
+            border-top: 1px solid #ddd;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <h1>Guía para crear y aplicar formato a la matriz de un balance</h1>
+
+        <div class="intro">
+            <p>En el mundo financiero, entender la estructura de una empresa es crucial. El balance de situación es la fotografía de sus activos, pasivos y patrimonio en un momento dado. Power BI nos ofrece una herramienta poderosa para transformar datos complejos en una visualización intuitiva. Esta guía te acompañará en el viaje de construir, paso a paso, el componente del activo de tu balance de situación, centrándonos en el porqué de cada acción para que puedas replicarla y adaptarla con confianza.</p>
+            <p>Utilizaremos principalmente el panel <strong>Compilar</strong> para la estructura y el panel <strong>Formato</strong> para la estética, sin olvidar el panel <strong>Datos</strong> para la preparación inicial.</p>
+        </div>
+
+        <details>
+            <summary><strong>Paso 1: Insertar el objeto visual de matriz</strong></summary>
+            <div class="details-content">
+                <div class="explanation-box why">
+                    <h3>El porqué (la lógica)</h3>
+                    <p>El balance de situación no es solo una lista de números; es una estructura jerárquica con masas patrimoniales, epígrafes y subepígrafes. Para representar esta complejidad de forma clara y permitir la expansión o contracción de los niveles de detalle, un simple objeto visual de <strong>tabla</strong> no sería suficiente. La <strong>matriz</strong> es el lienzo perfecto, ya que permite múltiples niveles de filas y columnas, justo lo que necesitamos para construir un balance detallado y comprensible.</p>
+                </div>
+                <div class="explanation-box how">
+                    <h3>El cómo (la práctica)</h3>
+                    <ol>
+                        <li>Asegúrate de no tener ningún objeto visual seleccionado en el lienzo.</li>
+                        <li>Ve a la cinta de opciones superior: <strong>Ficha Inicio</strong> / <strong>Grupo Insertar</strong> / <strong>Galería de objetos visuales</strong>.</li>
+                        <li>Haz clic en el icono de <strong>Matriz</strong>. Se añadirá una matriz en blanco a tu informe.</li>
+                    </ol>
+                </div>
+            </div>
+        </details>
+
+        <details>
+            <summary><strong>Paso 2: Configurar la jerarquía de filas del activo</strong></summary>
+            <div class="details-content">
+                <div class="explanation-box why">
+                    <h3>El porqué (la lógica)</h3>
+                    <p>Una vez tenemos nuestro lienzo (la matriz), el siguiente paso es darle forma a la columna vertebral de nuestro balance. La tabla <strong>dimPGC</strong> contiene la taxonomía contable que define el orden y la categorización de cada elemento del activo. Arrastrar estos campos en el orden correcto es como construir los cimientos de nuestro edificio financiero, asegurando que cada partida se ubique en su lugar correspondiente. Renombrar el nivel superior a <strong>ACTIVO</strong> no es solo una cuestión estética, sino una declaración de propósito: estamos construyendo la parte del activo, y su nombre debe reflejarlo para el usuario final.</p>
+                </div>
+                <div class="explanation-box how">
+                    <h3>El cómo (la práctica)</h3>
+                    <ol>
+                        <li>Selecciona la matriz que acabas de insertar.</li>
+                        <li>En el panel de la derecha, verás el panel <strong>Compilar</strong>. Si no lo ves, actívalo desde el botón correspondiente (icono de gráfico de columnas con un cilindro).</li>
+                        <li>En el panel <strong>Datos</strong>, despliega la tabla <strong>dimPGC</strong>.</li>
+                        <li>Arrastra los siguientes campos, en este orden exacto, al apartado <strong>Filas</strong> del panel <strong>Compilar</strong>:
+                            <ul>
+                                <li><strong>nomMasa</strong></li>
+                                <li><strong>epigrafe</strong></li>
+                                <li><strong>subEpigrafe</strong></li>
+                            </ul>
+                        </li>
+                        <li><strong>Renombrar el primer nivel:</strong> Para que sea más claro y representativo, en el apartado <strong>Filas</strong>, haz doble clic sobre <strong>nomMasa</strong> y escribe <strong>ACTIVO</strong>. Pulsa Intro. Si el doble clic falla, puedes usar el clic derecho del ratón y elegir la opción <strong>Cambiar nombre de este objeto visual</strong>.</li>
+                    </ol>
+                </div>
+            </div>
+        </details>
+        
+        <details>
+            <summary><strong>Paso 3: Añadir las medidas (valores)</strong></summary>
+            <div class="details-content">
+                <div class="explanation-box why">
+                    <h3>El porqué (la lógica)</h3>
+                    <p>Los activos no son solo nombres; son valores financieros que cambian con el tiempo. Las medidas <strong>DAX</strong> (<strong>#02 Anterior. Activo</strong>, <strong>#01 Actual. Activo</strong>, <strong>#03 Variación % Activo</strong>) son el corazón numérico de nuestro balance. Son cálculos predefinidos que nos dan el valor en distintos períodos (año anterior, año actual) y la variación porcentual entre ellos. Al incorporarlas, Power BI las evaluará para cada fila de la jerarquía, dando vida a los nombres que hemos organizado. Renombrar estas medidas a términos más concisos y descriptivos (<strong>Anterior</strong>, <strong>Actual</strong>, <strong>Var %</strong>) es crucial para la legibilidad del informe, facilitando que cualquier usuario entienda la información de un solo vistazo sin interpretar nombres técnicos.</p>
+                </div>
+                <div class="explanation-box how">
+                    <h3>El cómo (la práctica)</h3>
+                    <ol>
+                        <li>En el panel <strong>Datos</strong>, despliega la tabla <strong>2 Medidas Balance</strong>.</li>
+                        <li>Arrastra (con el siguiente orden) las siguientes medidas al apartado <strong>Valores</strong> del panel <strong>Compilar</strong>:
+                            <ul>
+                                <li><strong>#02 Anterior. Activo</strong></li>
+                                <li><strong>#01 Actual. Activo</strong></li>
+                                <li><strong>#03 Variación % Activo</strong></li>
+                            </ul>
+                        </li>
+                        <li><strong>Renombrar las medidas para el visual:</strong> Para que los encabezados de columna sean más limpios y amigables:
+                            <ul>
+                                <li>En el apartado <strong>Valores</strong>, haz doble clic en <strong>#02 Anterior. Activo</strong> y renómbralo a <strong>Anterior</strong>.</li>
+                                <li>Haz doble clic en <strong>#01 Actual. Activo</strong> y renómbralo a <strong>Actual</strong>.</li>
+                                <li>Haz doble clic en <strong>#03 Variación % Activo</strong> y renómbralo a <strong>Var %</strong>.</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </details>
+
+        <details>
+            <summary><strong>Paso 4: Crear los iconos de flecha (formato condicional)</strong></summary>
+            <div class="details-content">
+                <div class="explanation-box why">
+                    <h3>El porqué (la lógica)</h3>
+                    <p>Los números, por sí solos, pueden ser áridos. Una variación porcentual del 15 % ¿es buena o mala? Depende del contexto. Para que el usuario pueda interpretar instantáneamente la tendencia de cada partida sin necesidad de cálculos mentales, introducimos los iconos de flecha. Este <strong>formato condicional</strong> transforma datos numéricos en señales visuales intuitivas (flecha arriba para aumento, flecha abajo para disminución, flecha lateral para sin cambios), acelerando la comprensión y destacando visualmente lo que requiere atención de un solo vistazo.</p>
+                </div>
+                <div class="explanation-box how">
+                    <h3>El cómo (la práctica)</h3>
+                    <ol>
+                        <li>En el panel <strong>Compilar</strong>, dentro del apartado <strong>Valores</strong>, busca la medida <strong>Var %</strong>.</li>
+                        <li>Haz clic con el botón secundario sobre ella y selecciona <strong>Formato condicional</strong> &gt; <strong>Iconos</strong>.</li>
+                        <li>Se abrirá la ventana de configuración de <strong>Iconos - Var %</strong>. Configúrala de la siguiente manera:
+                            <ul>
+                                <li><strong>Formato por:</strong> <strong>Reglas</strong></li>
+                                <li><strong>Aplicar a:</strong> <strong>Solo valores</strong></li>
+                                <li><strong>Campo en que se basa:</strong> <strong>Var %</strong> (ya estará seleccionado)</li>
+                                <li><strong>Diseño de los iconos:</strong> <strong>A la izquierda de los datos</strong></li>
+                                <li><strong>Alineación de los iconos:</strong> <strong>Superior</strong></li>
+                                <li><strong>Estilo:</strong> No es necesario cambiar esta configuración en este momento.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Configuración de Reglas:</strong> Vamos a configurar tres reglas para cubrir todos los casos (disminución, sin cambio, aumento).
+                            <ol type="a">
+                                <li><strong>Regla 1 (Disminución):</strong>
+                                    <ul>
+                                        <li>Si el valor es &gt;= <strong>Mín.</strong> Número y &lt; <strong>0</strong> Número, Entonces: Selecciona el icono de la flecha inclinada hacia abajo.</li>
+                                    </ul>
+                                    <p>Para establecer el valor <strong>Mín.</strong> solo debemos borrar el contenido del campo y aparecerá automáticamente.</p>
+                                </li>
+                                <li><strong>Regla 2 (Sin cambio):</strong>
+                                    <ul>
+                                        <li>Haz clic en <strong>+ Nueva regla</strong>.</li>
+                                        <li>Si el valor es = <strong>0</strong> Número, Entonces: Selecciona el icono de la flecha lateral.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Regla 3 (Aumento):</strong>
+                                    <ul>
+                                        <li>Haz clic en <strong>+ Nueva regla</strong>.</li>
+                                        <li>Si el valor es &gt; <strong>0</strong> Número y &lt;= <strong>Máx.</strong> Número, Entonces: Selecciona el icono de la flecha inclinada hacia arriba.</li>
+                                    </ul>
+                                    <p>Para establecer el valor <strong>Máx.</strong> solo debemos borrar el contenido del campo y aparecerá automáticamente.</p>
+                                </li>
+                            </ol>
+                        </li>
+                        <li>Haz clic en <strong>Aceptar</strong>.</li>
+                    </ol>
+                </div>
+            </div>
+        </details>
+
+        <details>
+            <summary><strong>Paso 5: Tamaño de fuente global</strong></summary>
+            <div class="details-content">
+                <div class="explanation-box why">
+                    <h3>El porqué (la lógica)</h3>
+                    <p>La legibilidad es primordial en cualquier informe. Un tamaño de fuente demasiado pequeño dificulta la lectura, mientras que uno excesivamente grande puede saturar la pantalla. Establecer un <strong>tamaño de fuente global</strong> de 11 puntos es un punto de partida equilibrado que garantiza que todo el contenido de la matriz sea fácilmente legible, proporcionando una experiencia de usuario cómoda y profesional. Es la base sobre la que construiremos el resto de la estética de nuestro balance.</p>
+                </div>
+                <div class="explanation-box how">
+                    <h3>El cómo (la práctica)</h3>
+                    <p>Selecciona la matriz y ve al panel <strong>Formato</strong>, luego a <strong>Objeto visual</strong>.</p>
+                    <p><strong>Ruta:</strong> <strong>Panel Formato</strong> &gt; <strong>Objeto visual</strong> &gt; <strong>Cuadrícula</strong> &gt; <strong>Opciones</strong><br>
+                    <strong>Acción:</strong> Cambia el valor de <strong>Tamaño de fuente global</strong> = 11.</p>
+                </div>
+            </div>
+        </details>
+
+        <details>
+            <summary><strong>Paso 6: Configurar los valores</strong></summary>
+            <div class="details-content">
+                <div class="explanation-box why">
+                    <h3>El porqué (la lógica)</h3>
+                    <p>Queremos un balance que sea claro, limpio y fácil de escanear. El color alterno de fondo (las típicas "rayas de cebra") a veces puede distraer en tablas grandes, por lo que lo unificamos en blanco para una apariencia más moderna y minimalista, centrando la atención solo en los datos. Desactivar el <strong>ajuste de texto</strong> es igualmente importante para mantener la uniformidad de las filas. Si el texto se ajusta, las filas tendrían alturas variables, rompiendo la cuadrícula visual y dificultando la comparación rápida de valores, lo cual no es ideal en un informe financiero.</p>
+                </div>
+                <div class="explanation-box how">
+                    <h3>El cómo (la práctica)</h3>
+                    <ol>
+                        <li>
+                            <strong>Quitar color alterno a las filas:</strong>
+                            <p><strong>Ruta:</strong> <strong>Panel Formato</strong> &gt; <strong>Objeto visual</strong> &gt; <strong>Valores</strong> &gt; <strong>Alternar color de fondo</strong><br>
+                            <strong>Acción:</strong> Haz clic en el selector de color y elige un blanco para que todas las filas tengan el mismo fondo.</p>
+                        </li>
+                        <li>
+                            <strong>Desactivar el ajuste de texto:</strong>
+                            <p><strong>Ruta:</strong> <strong>Panel Formato</strong> &gt; <strong>Objeto visual</strong> &gt; <strong>Valores</strong> &gt; <strong>Ajuste de texto</strong><br>
+                            <strong>Acción:</strong> Desactiva el control deslizante para asegurar que el texto se trunca si no cabe, manteniendo la altura de fila constante.</p>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </details>
+
+        <details>
+            <summary><strong>Paso 7: Formatear los encabezados de columna</strong></summary>
+            <div class="details-content">
+                <div class="explanation-box why">
+                    <h3>El porqué (la lógica)</h3>
+                    <p>Los encabezados de columna no son datos; son las guías que nos indican qué tipo de información estamos viendo. Deben destacarse visualmente para que el ojo del usuario pueda identificarlos rápidamente y entender la estructura de la tabla. Aplicar negrita es un principio fundamental de la jerarquía visual: diferencia claramente las etiquetas descriptivas de los valores numéricos, mejorando la escaneabilidad y la comprensión general del informe.</p>
+                </div>
+                <div class="explanation-box how">
+                    <h3>El cómo (la práctica)</h3>
+                    <ol>
+                        <li>
+                            <strong>Cambiar la fuente y aplicar negrita:</strong>
+                            <p><strong>Ruta:</strong> <strong>Panel Formato</strong> &gt; <strong>Objeto visual</strong> &gt; <strong>Encabezados de columna</strong> &gt; <strong>Texto</strong> &gt; <strong>Fuente</strong><br>
+                            <strong>Acción:</strong> Haz clic en el icono <strong>B</strong> para aplicar la <strong>negrita</strong>.</p>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </details>
+
+        <details>
+            <summary><strong>Paso 8: Resaltar la fila del total general</strong></summary>
+            <div class="details-content">
+                <div class="explanation-box why">
+                    <h3>El porqué (la lógica)</h3>
+                    <p>El <strong>Total general</strong> es una cifra crucial, ya que representa la suma consolidada de todo el activo. Para que este valor salte a la vista y sea fácilmente identificable como un resumen clave, lo resaltamos con un color de fondo diferente. Un verde claro, por ejemplo, no solo lo distingue del resto de las partidas, sino que puede asociarse mentalmente con un resultado consolidado y positivo, dándole un toque visual apropiado en el contexto de un balance.</p>
+                </div>
+                <div class="explanation-box how">
+                    <h3>El cómo (la práctica)</h3>
+                    <p><strong>Ruta:</strong> <strong>Panel Formato</strong> &gt; <strong>Objeto visual</strong> &gt; <strong>Total general de fila</strong> &gt; <strong>Valores</strong> &gt; <strong>Color de fondo</strong><br>
+                    <strong>Acción:</strong> Haz clic en el selector de color y elige un verde claro.</p>
+                </div>
+            </div>
+        </details>
+        
+        <div class="conclusion">
+            <p><strong>¡Y ya lo tienes!</strong></p>
+	        <p>Has construido una matriz del activo de un balance de situación en Power BI, funcional, jerárquica y con indicadores visuales de variación que facilitan enormemente su interpretación.</p>
+            <p>El proceso para crear la tabla del <strong>pasivo</strong> sería casi idéntico, con las únicas diferencias de las medidas <strong>DAX</strong> a utilizar y, si lo deseas, un color de fondo distinto en los totales del paso 8 para diferenciarlos visualmente del activo. ¡Anímate a replicar este conocimiento y llevar tus informes financieros al siguiente nivel!</p>
+        </div>
+
+    </div>
+
+</body>
+</html>
